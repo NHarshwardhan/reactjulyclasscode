@@ -1,9 +1,16 @@
 // useState() with object
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm() {
 
   const [loginInfo , setLogininfo] = useState({username:'', password:''})
+  
+
+
+  const navigate  = useNavigate()
+
 
   // capture user input
   const handleChange = (event)=>{      
@@ -13,36 +20,22 @@ export default function LoginForm() {
   }
 
   const loginProcess = ()=>{
-      console.log(loginInfo)
+      if(loginInfo.username === 'admin'  && loginInfo.password === 'admin'){
+                // connect to db via api and return auth token from an api
+                // store token in session storage
+                sessionStorage.setItem('role', 'admin')
+                navigate('/home');
+      }else{
+          sessionStorage.setItem('role', 'guest')
+          navigate('/home');
+      }
   }
 
   return (
-    <div style={{marginLeft: '10px'}}>
+    <div className='container mt-5' >
 
-         {/* <h1>Login Panel</h1>
-
-         <label>Username</label><br/>
-         <input type='text' 
-                name='username' 
-                onChange={(event)=>setLogininfo({...loginInfo,username:event.target.value})}/><br/>
-
-         <br/><br/>
-         <label>Password</label><br/>
-         <input type='password' 
-                name='password'
-                onChange={(event)=>setLogininfo({...loginInfo,password:event.target.value})}/><br/>
-
-         <br/>
-
-          {JSON.stringify(loginInfo)}
-          <br/>         <br/>
-         <button onClick={loginProcess}>Login</button> */}
-
-
-         {/* ------------Capture user input thorugh a function handleChange-------- */}
-
-         <h1>Login Panel</h1>
-
+          <h1 className='mb-3'>Login Panel</h1>
+            
             <label>Username</label><br/>
             <input type='text' 
                    name='username' 
@@ -58,9 +51,9 @@ export default function LoginForm() {
 
             <br/>
 
-            {JSON.stringify(loginInfo)}
+          
             <br/>         <br/>
-            <button onClick={loginProcess}>Login</button>
+            <button className='btn btn-success' onClick={loginProcess}>Login</button>
     </div>
   )
 }

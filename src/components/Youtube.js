@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { MyContext } from '../App'
 
 export default function Youtube() {
     
+  const contextValue = useContext(MyContext)
+
     // destructure useState()
     const [message, setMessage] = useState('Please subscribe' )
     const [status , setStatus] = useState(false)
@@ -33,7 +36,10 @@ export default function Youtube() {
           <button onClick={incrementCount}>Increment</button> */}
 
           {/* -----------------Inline Approach------------------------- */}
-
+         
+          <h3>
+             Context Value = {contextValue}
+          </h3>
           <h1>{message}</h1>
           <button onClick={()=>setMessage('Thank you for subscribing..!')}>subscribe</button>
 
