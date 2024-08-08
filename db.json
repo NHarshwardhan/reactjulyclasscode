@@ -112,8 +112,8 @@
       "designation": "Developer",
       "salary": "50000",
       "loanAmountToApply": "3000",
-      "approved": true,
-      "rejected": false,
+      "approved": false,
+      "rejected": true,
       "id": "4"
     }
   ],
